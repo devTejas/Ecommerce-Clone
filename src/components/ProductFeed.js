@@ -21,7 +21,7 @@ const ProductFeed = ({ products }) => {
             />
           );
         })}
-      <Image src="/assets/" layout="fill" />
+      <img src="/assets/ad.jpg" className="md:col-span-full mx-auto" />
       <div className="md:col-span-2">
         {products
           .slice(4, 5)
