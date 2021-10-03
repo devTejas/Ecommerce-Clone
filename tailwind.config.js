@@ -14,6 +14,9 @@ module.exports = {
         },
         shopit_orange: "#fc7a69",
       },
+      fontFamily: {
+        poppins: "'Poppins', 'Verdana', monospace",
+      },
     },
   },
   variants: {

@@ -1,12 +1,23 @@
+import { signIn, signOut, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 import React from "react";
-// import "./header.css";
+import { useSelector } from "react-redux";
+import { selectNumberOfItems } from "../slices/basketSlice";
 
 const Header = () => {
+  const [session] = useSession();
+  const router = useRouter();
+
+  const numberOfItems = useSelector(selectNumberOfItems);
+
   return (
-    <header className="text-shopit_orange">
-      <div className="flex items-center bg-shopit_blue p-1 py-2 flex-grow">
+    <header className="text-shopit_orange sticky top-0 z-50">
+      <div className=" flex items-center bg-shopit_blue p-1 py-2 flex-grow">
         <div className="mt-2 flex items-center sm::flex-grow-0 flex-grow">
-          <div className="flex flex-col cursor-pointer mx-2">
+          <div
+            className="flex flex-col cursor-pointer mx-2"
+            onClick={() => router.push("/")}
+          >
             <img
               className="w-7 mx-2"
               src="/assets/shopping-bag(4).svg"
@@ -25,18 +36,21 @@ const Header = () => {
           </div>
         </div>
         <div className="flex items-center justify-evenly text-xs space-x-6 mx-6 whitespace-nowrap">
-          <div className="link">
-            <p>Hello, SignIn</p>
-            <p className="font-extrabold md:text-sm">Accounts & Orders</p>
+          <div className="link" onClick={session?.user ? signOut : signIn}>
+            <p>{`Hello, ${session?.user ? session.user?.name : "SignIn"}`}</p>
+            <p className="font-extrabold md:text-sm">{`Accounts & Orders`}</p>
           </div>
           <div className="link">
             <p>Returns</p>
-            <p className="font-extrabold md:text-sm">& Orders</p>
+            <p className="font-extrabold md:text-sm">{`& Orders`}</p>
           </div>
-          <div className="link flex items-center">
+          <div
+            className="link flex items-center"
+            onClick={() => router.push("/checkout")}
+          >
             <div className="relative">
               <span className="absolute top-0 right-0 left-4 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">
-                0
+                {numberOfItems}
               </span>
               <img
                 className="max-w-none"
