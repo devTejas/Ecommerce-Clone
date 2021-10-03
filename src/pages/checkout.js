@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/client";
 import Image from "next/image";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -16,10 +17,13 @@ const Checkout = () => {
     }
   }
 
+  const [session] = useSession();
+
   return (
     <div className="bg-gray-100 font-poppins">
       <Header />
       <main className="lg:flex max-w-screen-2xl mx-auto">
+        {/* Left Side */}
         <div className="flex-grow m-5 shadow-sm">
           <Image
             src="/assets/ad.jpg"
@@ -35,6 +39,20 @@ const Checkout = () => {
           {cartItems.map((item) => (
             <CheckoutProduct key={item.id} {...item} />
           ))}
+        </div>
+        {/* Right Side */}
+        <div>
+          {numberOfItems > 0 && (
+            <div>
+              <h2 className="whitespace-nowrap">
+                SubTotal ({numberOfItems} items)
+                <span className="font-bold">{/* Currency */}</span>
+                <button>
+                  {!session ? "Sign In to Checkout" : "Proceed to checkout"}
+                </button>
+              </h2>
+            </div>
+          )}
         </div>
       </main>
     </div>
