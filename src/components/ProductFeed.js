@@ -5,7 +5,6 @@ import Product from "./Product";
 
 const ProductFeed = ({ products }) => {
   const items = useSelector(selectItems);
-  console.log(items);
 
   return (
     // <div className="grid grid-cols-4 gap-4 p-4 bg-gray-100">

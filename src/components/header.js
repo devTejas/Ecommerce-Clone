@@ -1,14 +1,34 @@
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectNumberOfItems } from "../slices/basketSlice";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToBasket,
+  selectItems,
+  selectNumberOfItems,
+} from "../slices/basketSlice";
 
 const Header = () => {
   const [session] = useSession();
   const router = useRouter();
 
   const numberOfItems = useSelector(selectNumberOfItems);
+  console.log(numberOfItems, useSelector(selectItems));
+
+  const items = useSelector(selectItems);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // let localStorageItems = JSON.parse(localStorage.getItem("items"));
+    // console.log(
+    //   localStorage.getItem("items"),
+    //   JSON.parse(localStorage.getItem("items"))
+    // );
+    // if (!items) {
+    //   localStorageItems.map((item) => dispatch(addToBasket(item)));
+    // }
+  }, [items]);
 
   return (
     <header className="text-shopit_orange sticky top-0 z-50">
@@ -40,7 +60,7 @@ const Header = () => {
             <p>{`Hello, ${session?.user ? session.user?.name : "SignIn"}`}</p>
             <p className="font-extrabold md:text-sm">{`Accounts & Orders`}</p>
           </div>
-          <div className="link">
+          <div className="link" onClick={() => router.push("/orders")}>
             <p>Returns</p>
             <p className="font-extrabold md:text-sm">{`& Orders`}</p>
           </div>

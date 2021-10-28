@@ -35,42 +35,44 @@ const CheckoutProduct = ({
   };
 
   return (
-    <div className="grid grid-cols-5">
+    <div className="grid grid-cols-5 pb-2 border-b">
       <Image src={image} width={200} height={200} objectFit="contain" />
       <div className="col-span-3 mx-5">
         <p>{title}</p>
         <p>{"⭐".repeat(rating)}</p>
         <p className="text-xs my-2 line-clamp-3">{description}</p>
-        <p>Rs. {price} (₹)</p>
+        <p>
+          Rs. {price} (₹) * {count} = {price * count} (₹)
+        </p>
         {isPrime && <p className="text-xs">🤑FREE Next-day Delivery</p>}
-        <div className="flex flex-col">
-          <div className="flex h-8">
-            <button
-              className="p-2 w-8 bg-green-500"
-              onClick={() => addItemToBasket(count + 1)}
-            >
-              +
-            </button>
-            <input
-              type="number"
-              value={count}
-              onChange={(e) => addItemToBasket(e.target.value)}
+        <div className="flex h-7 text-black justify-end">
+          <button
+            className="w-7 bg-green-400 font-extrabold mx-4"
+            onClick={() => addItemToBasket(count + 1)}
+          >
+            +
+          </button>
+          <input
+            className="w-12 border-2 border-black text-center"
+            type="number"
+            min={1}
+            value={count}
+            onChange={(e) => addItemToBasket(e.target.value)}
+          />
+          <button
+            className="w-7 bg-red-500 font-extrabold mx-4"
+            onClick={() => addItemToBasket(count - 1)}
+          >
+            -
+          </button>
+          <button className="" onClick={() => addItemToBasket(0)}>
+            <Image
+              src="/assets/RemoveFromCart.jpg"
+              width={25}
+              height={25}
+              objectFit="contain"
             />
-            <button
-              className="p-2 w-8 bg-red-500"
-              onClick={() => addItemToBasket(count - 1)}
-            >
-              -
-            </button>
-            <button className="" onClick={() => addItemToBasket(0)}>
-              <Image
-                src="/assets/RemoveFromCart.jpg"
-                width={25}
-                height={25}
-                objectFit="contain"
-              />
-            </button>
-          </div>
+          </button>
         </div>
       </div>
     </div>

@@ -66,6 +66,7 @@ const Product = (props) => {
           <input
             className="w-12 border-2 border-black text-center"
             type="number"
+            min={1}
             value={count}
             onChange={(e) => addItemToBasket(e.target.value)}
           />

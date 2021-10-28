@@ -11,16 +11,19 @@ export const basketSlice = createSlice({
   reducers: {
     // here action will be the object(product) to be pushed
     addToBasket: (state, action) => {
-      if (state.items[action.payload.id]?.count === 0) {
+      if (action.payload?.count <= 0) {
         delete state.items[action.payload.id];
         state.numberOfItems = state.numberOfItems - 1;
       } else {
-        state.items = { ...state.items, [action.payload.id]: action.payload };
-
-        if (state.items[action.payload.id]?.count === 1) {
+        if (!state.items[action.payload.id]) {
           state.numberOfItems = state.numberOfItems + 1;
         }
+
+        state.items = { ...state.items, [action.payload.id]: action.payload };
       }
+
+      // localStorage.setItem("items", JSON.stringify(items));
+      // localStorage.setItem("numberOfItems", JSON.stringify(numberOfItems));
     },
   },
 });
@@ -29,7 +32,10 @@ export const { addToBasket } = basketSlice.actions;
 
 // Selectors - This is how we pull information from the Global store slice
 export const selectItems = (state) => state.basket.items;
+
 export const selectNumberOfItems = (state) => state.basket.numberOfItems;
+
+// export const selectTotal = (state) => state.basket.items.reduce((total, item) => total + item.price, 0);
 
 export default basketSlice.reducer;
 
