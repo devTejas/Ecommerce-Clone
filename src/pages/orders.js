@@ -1,5 +1,6 @@
 import moment from "moment";
 import { getSession, useSession } from "next-auth/client";
+import Head from "next/head";
 import React from "react";
 import { db } from "../../firebaseConfig";
 import Header from "../components/header";
@@ -8,18 +9,27 @@ import OrderItem from "../components/OrderItem";
 const Orders = ({ orders }) => {
   const session = useSession();
   return (
-    <div className="font-poppins dark:bg-black h-screen">
+    <div
+      className={`font-poppins dark:bg-black ${
+        orders?.length ? "h-full" : "h-screen"
+      }`}
+    >
+      <Head>
+        <title>Shopit | Orders</title>
+      </Head>
       <Header />
       <main className="max-w-screen-lg mx-auto p-10">
         <h1
           className={
-            "text-3xl border-b mb-2 pb-1 border-yellow-400 dark:text-white"
+            "text-3xl border-b mb-2 pb-1 border-yellow-400 dark:text-shopit_orange"
           }
         >
           Your Orders
         </h1>
         {session[0] ? (
-          <h2>{orders?.length ? orders?.length : 0} orders</h2>
+          <h2 className="dark:text-white">
+            {orders?.length ? orders?.length : 0} orders
+          </h2>
         ) : (
           <h2 className="dark:text-white">Please sign in to see your orders</h2>
         )}

@@ -1,12 +1,13 @@
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 import { useSession } from "next-auth/client";
+import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 import { useSelector } from "react-redux";
 import CheckoutProduct from "../components/CheckoutProduct";
 import Header from "../components/header";
 import { selectItems, selectNumberOfItems } from "../slices/basketSlice";
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
 
 const stripePromise = loadStripe(process.env.stripe_public_key);
 
@@ -43,7 +44,14 @@ const Checkout = () => {
   const [session] = useSession();
 
   return (
-    <div className="bg-gray-100 font-poppins">
+    <div
+      className={`bg-gray-100 font-poppins dark:bg-black  ${
+        numberOfItems ? "h-full" : "h-screen"
+      }`}
+    >
+      <Head>
+        <title>ShopIt | Checkout</title>
+      </Head>
       <Header />
       <main className="lg:flex max-w-screen-2xl mx-auto">
         {/* Left Side */}
@@ -55,8 +63,8 @@ const Checkout = () => {
             objectFit="contain"
           />
 
-          <div className="flex flex-col p-5 space-y-10 bg-white">
-            <h1 className="text-3xl border-b pb-4">
+          <div className="flex flex-col p-5 space-y-10 bg-white dark:bg-black dark:border-2 border-shopit_orange rounded-lg">
+            <h1 className="text-3xl border-b pb-4 text-shopit_orange">
               {numberOfItems ? "Your Shopping Cart" : "Cart is Empty!"}
             </h1>
             {cartItems.map((item) => (
@@ -66,7 +74,7 @@ const Checkout = () => {
         </div>
         {/* Right Side */}
         {numberOfItems > 0 && (
-          <div className="flex flex-col bg-white p-10 shadow-md">
+          <div className="flex flex-col bg-white p-10 shadow-md border-l-4 border-white dark:bg-black text-white">
             <h2 className="whitespace-nowrap">
               SubTotal ({numberOfItems} items)
               <span className="font-bold">Rs. {totalPrice.toFixed(2)} (₹)</span>
@@ -75,10 +83,10 @@ const Checkout = () => {
             <button
               role="link"
               disabled={!session}
-              className={`button mt-2 ${
+              className={`button mt-2 font-bold ${
                 !session &&
                 "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
-              }`}
+              } dark:text-black`}
               onClick={createCheckoutSession}
             >
               {!session ? "Sign In to Checkout" : "Proceed to checkout"}

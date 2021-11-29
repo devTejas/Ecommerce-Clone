@@ -39,9 +39,9 @@ const Header = () => {
               src="/assets/shopping-bag(4).svg"
               alt="Logo"
             />
-            <span className="text-center">ShopIt</span>
+            <span className="text-center font-bold">ShopIt</span>
           </div>
-          <div className="hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500">
+          {/* <div className="hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500">
             <input
               type="search"
               className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4 border-2 dark:border-white dark:bg-black"
@@ -49,7 +49,7 @@ const Header = () => {
               placeholder="Search your item"
             />
             <button className="h-12 px-3">🔍</button>
-          </div>
+          </div> */}
         </div>
         <div className="flex items-center justify-evenly text-xs space-x-6 mx-6 whitespace-nowrap">
           <div className="link" onClick={session?.user ? signOut : signIn}>
