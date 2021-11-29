@@ -35,16 +35,18 @@ const CheckoutProduct = ({
   };
 
   return (
-    <div className="grid grid-cols-5 pb-2 border-b">
+    <div className="grid grid-cols-5 pb-2 border-b text-white">
       <Image src={image} width={200} height={200} objectFit="contain" />
       <div className="col-span-3 mx-5">
-        <p>{title}</p>
+        <p className="dark:text-shopit_orange">{title}</p>
         <p>{"⭐".repeat(rating)}</p>
-        <p className="text-xs my-2 line-clamp-3">{description}</p>
+        <p className="text-xs my-2 text-gray-500 line-clamp-3">{description}</p>
         <p>
           Rs. {price} (₹) * {count} = {price * count} (₹)
         </p>
-        {isPrime && <p className="text-xs">🤑FREE Next-day Delivery</p>}
+        {isPrime && (
+          <p className="text-xs text-shopit_orange">🤑FREE Next-day Delivery</p>
+        )}
         <div className="flex h-7 text-black justify-end">
           <button
             className="w-7 bg-green-400 font-extrabold mx-4"

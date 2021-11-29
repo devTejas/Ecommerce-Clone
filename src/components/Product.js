@@ -30,9 +30,10 @@ const Product = (props) => {
   };
 
   return (
-    <div className="relative flex flex-col m-5 z=30 p-10 text-sm text-gray-600 bg-white">
+    <div className="relative flex flex-col m-5 z=30 p-10 text-sm text-gray-600 bg-white rounded-lg border-4 dark:bg-black border-shopit_orange text-white">
       <p className="absolute text-xs top-2 right-2">{category}</p>
       <Image
+        className="rounded-md"
         loading="lazy"
         src={image}
         alt={title}
@@ -40,19 +41,22 @@ const Product = (props) => {
         height={170}
         objectFit="contain"
       />
-      <p className="font-bold text-black overflow-ellipsis line-clamp-1">
+      <p className="font-bold text-black overflow-ellipsis line-clamp-1 dark:text-shopit_orange">
         {title}
       </p>
       <p>{"⭐".repeat(rating)}</p>
       <p className="text-xs my-2 text-gray-500 line-clamp-2">{description}</p>
       <p className="mb-5">Rs.{price} (₹)</p>
       {isPrime && (
-        <p className="text-xs space-x-2 -mt-5 font-bold text-black">
+        <p className="text-xs space-x-2 -mt-5 mb-2 font-bold text-black dark:text-shopit_orange">
           🤑Prime<span className="text-gray-500"> - Free Delivery</span>
         </p>
       )}
       {!count ? (
-        <button className="mt-auto button" onClick={() => addItemToBasket()}>
+        <button
+          className="mt-auto button font-bold dark:text-black"
+          onClick={() => addItemToBasket()}
+        >
           Add to Cart
         </button>
       ) : (
@@ -71,7 +75,7 @@ const Product = (props) => {
             onChange={(e) => addItemToBasket(e.target.value)}
           />
           <button
-            className="w-7 bg-red-500  font-extrabold mx-4"
+            className="w-7 bg-red-500 font-extrabold mx-4"
             onClick={() => addItemToBasket(count - 1)}
           >
             -
