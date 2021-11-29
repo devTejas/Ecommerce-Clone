@@ -21,7 +21,7 @@ export default function Home({ products }) {
         />
       </Head>
       <Header />
-      <main className="max-w-screen-2xl mx-auto bg-gray-100 md:px-12">
+      <main className="max-w-screen-2xl mx-auto bg-gray-100 md:px-12 dark:bg-black">
         <Banner />
         <ProductFeed products={products} />
       </main>
