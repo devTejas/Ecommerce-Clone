@@ -2,18 +2,14 @@ import { signIn, signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToBasket,
-  selectItems,
-  selectNumberOfItems,
-} from "../slices/basketSlice";
+import { selectItems, selectNumberOfItems } from "../slices/basketSlice";
 
 const Header = () => {
   const [session] = useSession();
   const router = useRouter();
 
   const numberOfItems = useSelector(selectNumberOfItems);
-  console.log(numberOfItems, useSelector(selectItems));
+  // console.log(numberOfItems, useSelector(selectItems));
 
   const items = useSelector(selectItems);
 
@@ -31,7 +27,7 @@ const Header = () => {
   }, [items]);
 
   return (
-    <header className="text-shopit_orange sticky top-0 z-50">
+    <header className="text-shopit_orange sticky top-0 z-50 dark:border-b-2 dark:border-shopit_orange">
       <div className=" flex items-center bg-shopit_blue p-1 py-2 flex-grow">
         <div className="mt-2 flex items-center sm::flex-grow-0 flex-grow">
           <div
@@ -48,7 +44,7 @@ const Header = () => {
           <div className="hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500">
             <input
               type="search"
-              className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
+              className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4 border-2 dark:border-white dark:bg-black"
               name="search"
               placeholder="Search your item"
             />
@@ -57,12 +53,15 @@ const Header = () => {
         </div>
         <div className="flex items-center justify-evenly text-xs space-x-6 mx-6 whitespace-nowrap">
           <div className="link" onClick={session?.user ? signOut : signIn}>
-            <p>{`Hello, ${session?.user ? session.user?.name : "SignIn"}`}</p>
-            <p className="font-extrabold md:text-sm">{`Accounts & Orders`}</p>
+            <p className="font-extrabold md:text-sm">{`Hello, ${
+              session?.user ? session.user?.name : "Guest"
+            }`}</p>
+            <p className="font-extrabold md:text-sm">{`Sign ${
+              session?.user ? "Out" : "In"
+            }`}</p>
           </div>
           <div className="link" onClick={() => router.push("/orders")}>
-            <p>Returns</p>
-            <p className="font-extrabold md:text-sm">{`& Orders`}</p>
+            <p className="font-extrabold md:text-sm">Orders</p>
           </div>
           <div
             className="link flex items-center"
@@ -84,7 +83,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center space-x-3 p-2 pl-6 bg-shopit_blue-light text-sm">
+      {/* <div className="flex items-center space-x-3 p-2 pl-6 bg-shopit_blue-light text-sm">
         <p className="link flex items-center">
           <img className="mr-1" src="/assets/menu.svg" alt="Menu" />
           All
@@ -99,7 +98,7 @@ const Header = () => {
         <p className="hidden link lg:inline-flex">Electronics</p>
         <p className="hidden link lg:inline-flex">Crafts</p>
         <p className="hidden link lg:inline-flex">Arts</p>
-      </div>
+      </div> */}
     </header>
   );
 };
