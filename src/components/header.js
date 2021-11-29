@@ -1,12 +1,13 @@
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectItems, selectNumberOfItems } from "../slices/basketSlice";
 
 const Header = () => {
   const [session] = useSession();
   const router = useRouter();
+  const [darkMode, setDarkMode] = useState(true);
 
   const numberOfItems = useSelector(selectNumberOfItems);
   // console.log(numberOfItems, useSelector(selectItems));
@@ -25,6 +26,12 @@ const Header = () => {
     //   localStorageItems.map((item) => dispatch(addToBasket(item)));
     // }
   }, [items]);
+
+  // changing from darkmode to lightmode
+  const switchTheme = () => {
+    setDarkMode(!darkMode);
+    darkMode === false && localStorage.setItem("theme", "light");
+  };
 
   return (
     <header className="text-shopit_orange sticky top-0 z-50 dark:border-b-2 dark:border-shopit_orange">
@@ -80,6 +87,24 @@ const Header = () => {
             <p className="link hidden sm:inline font-extrabold md:text-sm mt-2">
               Cart
             </p>
+          </div>
+          <div
+            className="link hover:bg-shopit_orange rounded-md"
+            onClick={switchTheme}
+          >
+            {darkMode ? (
+              <img
+                className="hover:bg-shopit_orange"
+                src={`assets/sun2.svg`}
+                alt=""
+              />
+            ) : (
+              <img
+                className="hover:bg-shopit_orange"
+                src={`assets/moon2.svg`}
+                alt=""
+              />
+            )}
           </div>
         </div>
       </div>
