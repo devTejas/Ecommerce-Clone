@@ -1,8 +1,8 @@
+import moment from "moment";
 import { getSession, useSession } from "next-auth/client";
 import React from "react";
 import { db } from "../../firebaseConfig";
 import Header from "../components/header";
-import moment from "moment";
 import OrderItem from "../components/OrderItem";
 
 const Orders = ({ orders }) => {
@@ -68,6 +68,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       orders,
+      session
     },
   };
 }
