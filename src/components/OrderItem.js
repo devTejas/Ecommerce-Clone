@@ -11,7 +11,7 @@ key,
 
 const OrderItem = ({ amount, id, images, items, timestamp }) => {
   return (
-    <div className="relative border rounded-md">
+    <div className="relative border-2 rounded-md border-shopit_orange">
       <div className="flex items-center space-x-10 p-5 bg-gray-100 text-sm text-gray-600 rounded-t-md dark:bg-gray-200">
         <div className="">
           <p className="text-xs">ORDER PLACED</p>

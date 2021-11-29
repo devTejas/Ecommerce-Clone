@@ -1,13 +1,14 @@
 import { signIn, signOut, useSession } from "next-auth/client";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectItems, selectNumberOfItems } from "../slices/basketSlice";
 
 const Header = () => {
   const [session] = useSession();
   const router = useRouter();
-  const [darkMode, setDarkMode] = useState(true);
+  const { theme, setTheme } = useTheme();
 
   const numberOfItems = useSelector(selectNumberOfItems);
   // console.log(numberOfItems, useSelector(selectItems));
@@ -29,8 +30,8 @@ const Header = () => {
 
   // changing from darkmode to lightmode
   const switchTheme = () => {
-    setDarkMode(!darkMode);
-    darkMode === false && localStorage.setItem("theme", "light");
+    setTheme(theme === "dark" ? "light" : "dark");
+    localStorage.setItem("theme", theme);
   };
 
   return (
@@ -89,22 +90,12 @@ const Header = () => {
             </p>
           </div>
           <div
-            className="link hover:bg-shopit_orange rounded-md"
+            className="link p-1 hover:bg-shopit_orange rounded-3xl hover:opacity-90"
             onClick={switchTheme}
+            title={`Switch to ${theme === "dark" ? "Light" : "Dark"} Theme!`}
           >
-            {darkMode ? (
-              <img
-                className="hover:bg-shopit_orange"
-                src={`assets/sun2.svg`}
-                alt=""
-              />
-            ) : (
-              <img
-                className="hover:bg-shopit_orange"
-                src={`assets/moon2.svg`}
-                alt=""
-              />
-            )}
+            {/* if mode is dark then show Sun(dark) Image, hence svg names are reversed */}
+            <img className="" src={`assets/${!theme ? "dark" : theme}.svg`} />
           </div>
         </div>
       </div>
