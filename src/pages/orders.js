@@ -6,19 +6,22 @@ import Header from "../components/header";
 import OrderItem from "../components/OrderItem";
 
 const Orders = ({ orders }) => {
-  console.log(orders);
   const session = useSession();
   return (
-    <div className="font-poppins">
+    <div className="font-poppins dark:bg-black h-screen">
       <Header />
       <main className="max-w-screen-lg mx-auto p-10">
-        <h1 className={"text-3xl border-b mb-2 pb-1 border-yellow-400"}>
+        <h1
+          className={
+            "text-3xl border-b mb-2 pb-1 border-yellow-400 dark:text-white"
+          }
+        >
           Your Orders
         </h1>
-        {session ? (
-          <h2>{orders.length} orders</h2>
+        {session[0] ? (
+          <h2>{orders?.length ? orders?.length : 0} orders</h2>
         ) : (
-          <h2>Please sign in to see your orders</h2>
+          <h2 className="dark:text-white">Please sign in to see your orders</h2>
         )}
         <div className="mt-5 space-y-4">
           {orders?.map((orderItem) => (
@@ -68,7 +71,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       orders,
-      session
+      session,
     },
   };
 }
