@@ -78,6 +78,9 @@ export async function getServerSideProps(context) {
     }))
   );
 
+  console.table(stripeOrders);
+  console.log(orders);
+
   return {
     props: {
       orders,
