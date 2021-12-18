@@ -8,6 +8,7 @@ import OrderItem from "../components/OrderItem";
 
 const Orders = ({ orders }) => {
   const session = useSession();
+  console.log(orders, session);
   return (
     <div
       className={`font-poppins dark:bg-black ${
@@ -78,7 +79,6 @@ export async function getServerSideProps(context) {
     }))
   );
 
-  console.table(stripeOrders);
   console.log(orders);
 
   return {
