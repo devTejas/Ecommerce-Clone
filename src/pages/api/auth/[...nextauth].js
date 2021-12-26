@@ -27,13 +27,7 @@ export default NextAuth({
       async authorize(credentials, req) {
         try {
           const { email, password } = credentials;
-          console.log(
-            "api/auth/[...nextauth].js - from guestLogin",
-            email,
-            password,
-            email.split("@"),
-            email.split("@")[0]
-          );
+          console.log("api/auth/[...nextauth].js -guestLogin", email, password);
           if (email === "user@testuser.com" && password === "testuser") {
             return firebase
               .auth()
@@ -45,6 +39,7 @@ export default NextAuth({
             .createUserWithEmailAndPassword(email, password)
             .then(({ user }) => ({ name: email.split("@")[0], ...user }));
         } catch (err) {
+          console.log(err);
           const { errorCode, errorMessage } = err;
           console.log(errorCode, errorMessage);
           return null;
