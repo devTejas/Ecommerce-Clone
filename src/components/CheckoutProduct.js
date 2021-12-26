@@ -38,10 +38,10 @@ const CheckoutProduct = ({
     <div className="grid grid-cols-5 pb-2 border-b text-white">
       <Image src={image} width={200} height={200} objectFit="contain" />
       <div className="col-span-3 mx-5">
-        <p className="dark:text-shopit_orange">{title}</p>
+        <p className="dark:text-shopit_orange text-black">{title}</p>
         <p>{"⭐".repeat(rating)}</p>
         <p className="text-xs my-2 text-gray-500 line-clamp-3">{description}</p>
-        <p>
+        <p className="dark:text-white text-black">
           Rs. {price} (₹) * {count} = {price * count} (₹)
         </p>
         {isPrime && (

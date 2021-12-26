@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   mode: "jit",
   purge: [
@@ -17,6 +19,11 @@ module.exports = {
       fontFamily: {
         Poppins: "'Poppins', 'Verdana', monospace",
       },
+    },
+    screens: {
+      xs: { min: "320px", max: "640px" },
+      md853: { min: "769px", max: "853px" },
+      ...defaultTheme.screens,
     },
   },
   variants: {

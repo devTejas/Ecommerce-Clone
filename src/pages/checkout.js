@@ -75,8 +75,8 @@ const Checkout = () => {
         {/* Right Side */}
         {numberOfItems > 0 && (
           <div className="flex flex-col bg-white p-10 shadow-md border-l-4 border-white dark:bg-black text-white">
-            <h2 className="whitespace-nowrap">
-              SubTotal ({numberOfItems} items)
+            <h2 className="whitespace-nowrap text-shopit_orange">
+              Total ({numberOfItems} items)
               <span className="font-bold">Rs. {totalPrice.toFixed(2)} (₹)</span>
             </h2>
 

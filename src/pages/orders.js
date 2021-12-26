@@ -8,7 +8,7 @@ import OrderItem from "../components/OrderItem";
 
 const Orders = ({ orders }) => {
   const session = useSession();
-  console.log(orders, session);
+  console.log("from order.js - ", orders, session);
   return (
     <div
       className={`font-poppins dark:bg-black ${
