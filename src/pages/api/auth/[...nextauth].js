@@ -41,7 +41,7 @@ export default NextAuth({
         } catch (err) {
           console.log(err);
           const { errorCode, errorMessage } = err;
-          console.log(errorCode, errorMessage);
+          console.log("error", errorCode, errorMessage, err);
           return null;
         }
       },

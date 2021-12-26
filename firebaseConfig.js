@@ -9,7 +9,9 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID,
 };
 
-const app = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
+// const app = !firebase.apps.length
+//   ? firebase.initializeApp(firebaseConfig)
+//   : firebase.app();
+
+const app = firebase.initializeApp(firebaseConfig);
 export const db = app.firestore();

@@ -56,6 +56,7 @@ export async function getServerSideProps(context) {
       props: {},
     };
   }
+  console.log("session - ", session);
 
   const stripeOrders = await db
     .collection("users")
@@ -79,7 +80,7 @@ export async function getServerSideProps(context) {
     }))
   );
 
-  console.log(orders);
+  console.log('orders - ',orders);
 
   return {
     props: {
