@@ -2,7 +2,7 @@ import moment from "moment";
 import { getSession, useSession } from "next-auth/client";
 import Head from "next/head";
 import React from "react";
-import { db } from "../../firebaseConfig";
+import { db, firebaseConfig } from "../../firebaseConfig";
 import Header from "../components/header";
 import OrderItem from "../components/OrderItem";
 
@@ -47,6 +47,8 @@ const Orders = ({ orders }) => {
 export default Orders;
 
 export async function getServerSideProps(context) {
+  firebase.initializeApp(firebaseConfig);
+
   const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
   //   Get the users logged in credentials...
@@ -80,7 +82,7 @@ export async function getServerSideProps(context) {
     }))
   );
 
-  console.log('orders - ',orders);
+  console.log("orders - ", orders);
 
   return {
     props: {

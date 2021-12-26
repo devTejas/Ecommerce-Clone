@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import CredentialsProvider from "next-auth/providers/credentials";
 import firebase from "firebase";
+import { firebaseConfig } from "../../../../firebaseConfig";
 
 export default NextAuth({
   providers: [
@@ -28,6 +29,8 @@ export default NextAuth({
         try {
           const { email, password } = credentials;
           console.log("api/auth/[...nextauth].js -guestLogin", email, password);
+          firebase.initializeApp(firebaseConfig);
+
           if (email === "user@testuser.com" && password === "testuser") {
             return firebase
               .auth()
