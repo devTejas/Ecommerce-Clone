@@ -4,6 +4,7 @@ import Head from "next/head";
 import React from "react";
 import { db, firebaseConfig } from "../../firebaseConfig";
 import Header from "../components/header";
+import firebase from "firebase";
 import OrderItem from "../components/OrderItem";
 
 const Orders = ({ orders }) => {
@@ -47,7 +48,9 @@ const Orders = ({ orders }) => {
 export default Orders;
 
 export async function getServerSideProps(context) {
-  firebase.initializeApp(firebaseConfig);
+  const app = !firebase.apps.length
+    ? firebase.initializeApp(firebaseConfig)
+    : firebase.app();
 
   const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 

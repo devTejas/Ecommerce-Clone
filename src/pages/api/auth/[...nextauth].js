@@ -29,7 +29,9 @@ export default NextAuth({
         try {
           const { email, password } = credentials;
           console.log("api/auth/[...nextauth].js -guestLogin", email, password);
-          firebase.initializeApp(firebaseConfig);
+          const app = !firebase.apps.length
+            ? firebase.initializeApp(firebaseConfig)
+            : firebase.app();
 
           if (email === "user@testuser.com" && password === "testuser") {
             return firebase
